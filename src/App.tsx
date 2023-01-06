@@ -167,7 +167,7 @@ export default function App() {
   return (
     <>
       <Navbar width={{ sm: 300 }}>
-        <Navbar.Section grow className={classes.wrapper}>
+        {/* <Navbar.Section grow className={classes.wrapper}>
           <div className={classes.aside}>
             <div className={classes.logo}>
               <MantineLogo type='mark' size={30} />
@@ -180,7 +180,7 @@ export default function App() {
             </Title>
             {links}
           </div>
-        </Navbar.Section>
+        </Navbar.Section> */}
       </Navbar>
     </>
   );
