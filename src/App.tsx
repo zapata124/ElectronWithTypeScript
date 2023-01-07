@@ -10,7 +10,7 @@ import {
   IconSettings,
 } from '@tabler/icons';
 import { MantineLogo } from '@mantine/ds';
-
+import Fade from 'react-reveal/Fade';
 const useStyles = createStyles((theme) => ({
   wrapper: {
     display: 'flex',
