@@ -138,11 +138,15 @@ export default function App() {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState('Releases');
   const [activeLink, setActiveLink] = useState('Settings');
-
+  const [openMenu, setOpenMenu] = useState(false);
+  const handleButtonActions = (label: any) => {
+    setActive(label);
+    setOpenMenu(!openMenu);
+  };
   const mainLinks = mainLinksMockdata.map((link) => (
     <Tooltip label={link.label} position='right' withArrow transitionDuration={0} key={link.label}>
       <UnstyledButton
-        onClick={() => setActive(link.label)}
+        onClick={() => handleButtonActions(link.label)}
         className={cx(classes.mainLink, { [classes.mainLinkActive]: link.label === active })}
       >
         <link.icon stroke={1.5} />
@@ -166,21 +170,23 @@ export default function App() {
 
   return (
     <>
-      <Navbar width={{ sm: 300 }}>
-        {/* <Navbar.Section grow className={classes.wrapper}>
+      <Navbar width={{ sm: openMenu ? 300 : 0 }}>
+        <Navbar.Section grow className={classes.wrapper}>
           <div className={classes.aside}>
             <div className={classes.logo}>
               <MantineLogo type='mark' size={30} />
             </div>
             {mainLinks}
           </div>
-          <div className={classes.main}>
-            <Title order={4} className={classes.title}>
-              {active}
-            </Title>
-            {links}
-          </div>
-        </Navbar.Section> */}
+          {openMenu && (
+            <div className={classes.main}>
+              <Title order={4} className={classes.title}>
+                {active}
+              </Title>
+              {links}
+            </div>
+          )}
+        </Navbar.Section>
       </Navbar>
     </>
   );
