@@ -11,6 +11,7 @@ import {
 } from '@tabler/icons';
 import { MantineLogo } from '@mantine/ds';
 import Fade from 'react-reveal/Fade';
+import Slide from '@mui/material/Slide';
 const useStyles = createStyles((theme) => ({
   wrapper: {
     display: 'flex',
@@ -139,6 +140,11 @@ export default function App() {
   const [active, setActive] = useState('Releases');
   const [activeLink, setActiveLink] = useState('Settings');
   const [openMenu, setOpenMenu] = useState(false);
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
   const handleButtonActions = (label: any) => {
     setActive(label);
     setOpenMenu(!openMenu);
@@ -179,12 +185,14 @@ export default function App() {
             {mainLinks}
           </div>
           {openMenu && (
-            <div className={classes.main}>
-              <Title order={4} className={classes.title}>
-                {active}
-              </Title>
-              {links}
-            </div>
+            <Slide direction='right' in={true} mountOnEnter unmountOnExit>
+              <div className={classes.main}>
+                <Title order={4} className={classes.title}>
+                  {active}
+                </Title>
+                {links}
+              </div>
+            </Slide>
           )}
         </Navbar.Section>
       </Navbar>
