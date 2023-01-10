@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createStyles, Navbar, UnstyledButton, Tooltip, Title } from '@mantine/core';
+import { createStyles, Navbar, UnstyledButton, Tooltip, Title, Drawer } from '@mantine/core';
 import {
   IconHome2,
   IconGauge,
@@ -12,6 +12,7 @@ import {
 import { MantineLogo } from '@mantine/ds';
 import Fade from 'react-reveal/Fade';
 import Slide from '@mui/material/Slide';
+
 const useStyles = createStyles((theme) => ({
   wrapper: {
     display: 'flex',
@@ -84,8 +85,8 @@ const useStyles = createStyles((theme) => ({
     boxSizing: 'border-box',
     display: 'block',
     textDecoration: 'none',
-    borderTopRightRadius: theme.radius.md,
-    borderBottomRightRadius: theme.radius.md,
+    // borderTopRightRadius: theme.radius.md,
+    // borderBottomRightRadius: theme.radius.md,
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
     padding: `0 ${theme.spacing.md}px`,
     fontSize: theme.fontSizes.sm,
@@ -185,14 +186,21 @@ export default function App() {
             {mainLinks}
           </div>
           {openMenu && (
-            <Slide direction='right' in={true} mountOnEnter unmountOnExit>
-              <div className={classes.main}>
-                <Title order={4} className={classes.title}>
-                  {active}
-                </Title>
-                {links}
+            <div className={classes.main}>
+              <Title order={4} className={classes.title}>
+                {active}
+              </Title>
+              <div>
+                <Drawer
+                  position='left'
+                  zIndex={-1}
+                  opened={openMenu}
+                  onClose={() => setOpenMenu(!openMenu)}
+                >
+                  {links}
+                </Drawer>
               </div>
-            </Slide>
+            </div>
           )}
         </Navbar.Section>
       </Navbar>
