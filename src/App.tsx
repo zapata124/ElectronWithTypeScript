@@ -202,7 +202,7 @@ export default function App() {
 
   return (
     <>
-      <Navbar width={{ xs: width }}>
+      <Navbar width={{ xs: openMenu? 300 : 0 }}>
         <Navbar.Section grow className={classes.wrapper}>
           <div className={classes.aside}>
             <div className={classes.logo}>
