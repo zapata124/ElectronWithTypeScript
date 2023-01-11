@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createStyles, Navbar, UnstyledButton, Tooltip, Title, Drawer } from '@mantine/core';
 import {
   IconHome2,
@@ -135,20 +135,45 @@ const linksMockdata = [
   'Open Issues',
   'Wiki pages',
 ];
+const useSlide = (): any => {
+  const [start, setStart] = useState(0);
+  const [widths, setWidths] = useState(0);
+
+  useEffect(() => {
+    if (widths !== start) {
+      const newWidth = setInterval(() => {
+        console.log({ widths }, 'ne');
+        setWidths((widths) => widths + 1);
+      }, 0);
+
+      return () => {
+        clearInterval(newWidth);
+      };
+    }
+  }, [widths, start]);
+
+  return { widths, setStart };
+};
 
 export default function App() {
+  const [width, setWidth] = useState();
+  const { widths, setStart } = useSlide();
   const { classes, cx } = useStyles();
   const [active, setActive] = useState('Releases');
   const [activeLink, setActiveLink] = useState('Settings');
   const [openMenu, setOpenMenu] = useState(false);
   const [checked, setChecked] = useState(false);
-
+  // console.log(widths, 'dd');
+  useEffect(() => {
+    setWidth(widths);
+  }, [widths]);
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
   const handleButtonActions = (label: any) => {
     setActive(label);
     setOpenMenu(!openMenu);
+    setStart(300);
   };
   const mainLinks = mainLinksMockdata.map((link) => (
     <Tooltip label={link.label} position='right' withArrow transitionDuration={0} key={link.label}>
@@ -177,7 +202,7 @@ export default function App() {
 
   return (
     <>
-      <Navbar width={{ sm: openMenu ? 300 : 0 }}>
+      <Navbar width={{ xs: width }}>
         <Navbar.Section grow className={classes.wrapper}>
           <div className={classes.aside}>
             <div className={classes.logo}>
@@ -190,16 +215,7 @@ export default function App() {
               <Title order={4} className={classes.title}>
                 {active}
               </Title>
-              <div>
-                <Drawer
-                  position='left'
-                  zIndex={-1}
-                  opened={openMenu}
-                  onClose={() => setOpenMenu(!openMenu)}
-                >
-                  {links}
-                </Drawer>
-              </div>
+              <div>{links}</div>
             </div>
           )}
         </Navbar.Section>
