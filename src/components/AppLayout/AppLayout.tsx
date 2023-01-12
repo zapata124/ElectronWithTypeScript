@@ -18,6 +18,10 @@ import AppFooter from './AppFooter';
 const AppLayout = () => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+
+  const handleOpen = () => {
+    setOpened(!opened)
+  }
   return (
     <AppShell
       styles={{
@@ -30,7 +34,7 @@ const AppLayout = () => {
       navbar={<NavBar />}
       aside={<SideBar />}
       footer={<AppFooter />}
-      header={<AppHeader />}
+      header={<AppHeader open={opened} handleOpen={handleOpen}/>}
     >
       <Text>Resize app to see responsive navbar in action</Text>
     </AppShell>
