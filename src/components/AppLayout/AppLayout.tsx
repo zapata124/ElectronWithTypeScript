@@ -31,8 +31,8 @@ const AppLayout = () => {
       }}
       navbarOffsetBreakpoint='sm'
       asideOffsetBreakpoint='sm'
-      navbar={<NavBar />}
-      aside={<SideBar />}
+      navbar={<NavBar opened={opened} />}
+      aside={<SideBar opened={opened} />}
       footer={<AppFooter />}
       header={<AppHeader open={opened} handleOpen={handleOpen}/>}
     >

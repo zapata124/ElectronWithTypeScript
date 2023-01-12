@@ -5,8 +5,8 @@ interface NavBarType {
 }
 const NavBar: React.FC<NavBarType> = ({ opened }: NavBarType): ReactElement => {
   return (
-    <Navbar p='md' hiddenBreakpoint='sm' hidden={!opened} width={{ sm: 200, lg: 300 }}>
-      <Text>Application navbar</Text>
+    <Navbar  hidden={opened} width={{ sm: opened? 200 : 65, lg: opened? 300 : 65 }}>
+      {/* <Text>Application navbar</Text> */}
     </Navbar>
   );
 };
