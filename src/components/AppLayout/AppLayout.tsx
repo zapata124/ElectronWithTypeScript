@@ -10,7 +10,9 @@ import {
   Burger,
   useMantineTheme,
 } from '@mantine/core';
-
+import AppHeader from './AppHeader';
+import NavBar from './NavBar';
+import SideBar from './SideBar';
 const AppLayout = () => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
@@ -23,11 +25,7 @@ const AppLayout = () => {
       }}
       navbarOffsetBreakpoint='sm'
       asideOffsetBreakpoint='sm'
-      navbar={
-        <Navbar p='md' hiddenBreakpoint='sm' hidden={!opened} width={{ sm: 200, lg: 300 }}>
-          <Text>Application navbar</Text>
-        </Navbar>
-      }
+      navbar={<NavBar />}
       aside={
         <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
           <Aside p='md' hiddenBreakpoint='sm' width={{ sm: 200, lg: 300 }}>
