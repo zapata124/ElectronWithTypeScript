@@ -31,19 +31,23 @@ const mainLinks = mainLinksMockdata.map((link) => (
     </UnstyledButton>
   </Tooltip>
 ));
+const NavBarClosedGrid = ({ opened }: any) => {
+  return (
+      <Grid.Col xs={opened ? 2 : 12} sx={{ backgroundColor: 'blue' }}>
+        fsd
+      </Grid.Col>
+  );
+};
+const NavBarOpenedGrid = ({ opened }: any) => {
+  return (
+    <Grid.Col xs={10} sx={{ backgroundColor: 'yellow' }}>
+      fsd
+    </Grid.Col>
+  );
+};
 const NavBar: React.FC<NavBarType> = ({ opened }: NavBarType): ReactElement => {
   return (
     <Navbar hidden={opened} width={{ sm: opened ? 200 : 65, lg: opened ? 300 : 65 }}>
-      <Grid sx={{ backgroundColor: 'red' }}>
-      {/* <Text>Application navbar</Text> */}
-        <Grid.Col xs={4}>fsd</Grid.Col>
-        <Grid.Col xs={8}>fsd</Grid.Col>
-        <Grid.Col xs={8}>fsd</Grid.Col>
-        <Grid.Col xs={4}>fsd</Grid.Col>
-        <Grid.Col xs={3}>fsd</Grid.Col>
-        <Grid.Col xs={3}>fsd</Grid.Col>
-        <Grid.Col xs={6}>fsd</Grid.Col>
-      </Grid>
       {mainLinks}
     </Navbar>
   );
