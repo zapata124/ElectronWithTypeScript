@@ -21,60 +21,60 @@ const sideBarIcons = [
   { icon: IconFingerprint, label: 'Security' },
   { icon: IconSettings, label: 'Settings' },
 ];
-const NavBarOpenedGrid = ({ children }: any) => {
+const NavBarOpenedGrid = () => {
   return (
-    <Grid.Col xs={10} >
-      {children}
+    <Grid.Col xs={10}>
+      ss
     </Grid.Col>
   );
 };
 const NavBarClosedGrid = ({ children, opened }: any) => {
+  console.log({ opened });
   return (
-    <Grid.Col
-      xs={opened ? 2 : 12}
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      {children}
-      {opened && (
-        <NavBarOpenedGrid>
-          <IconHome2 />
-        </NavBarOpenedGrid>
-      )}
-    </Grid.Col>
+    <>
+      <Grid.Col
+        xs={opened ? 2 : 12}
+        sx={{ paddingLeft: 26 }}
+      >
+        {children}
+      </Grid.Col>
+    </>
   );
 };
-const SideBarIcons = ({ sideMenuIcons }: any) => {
+const SideBarIcons = ({ sideMenuIcons, opened }: any) => {
   return (
     <Grid sx={{ paddingTop: 20 }}>
-      {sideMenuIcons.map((icon: any, index: number) => (
-        <NavBarClosedGrid key={`nav-${index}`}>
-          <Tooltip
-            label={icon.label}
-            position='right'
-            withArrow
-            transitionDuration={0}
-            key={icon.label}
-          >
-            <UnstyledButton
-            // onClick={() => setActive(link.label)}
-            // className={cx(classes.mainLink, { [classes.mainLinkActive]: link.label === active })}
-            >
-              <icon.icon stroke={1.5} />
-            </UnstyledButton>
-          </Tooltip>
-        </NavBarClosedGrid>
-      ))}
+      {sideMenuIcons.map((icon: any, index: number) => {
+        return (
+          <>
+            <NavBarClosedGrid key={`nav-${index}`} opened={opened}>
+              <Tooltip
+                label={icon.label}
+                position='right'
+                withArrow
+                transitionDuration={0}
+                key={icon.label}
+              >
+                <UnstyledButton
+                // onClick={() => setActive(link.label)}
+                // className={cx(classes.mainLink, { [classes.mainLinkActive]: link.label === active })}
+                >
+                  <icon.icon stroke={1.5} />
+                </UnstyledButton>
+              </Tooltip>
+            </NavBarClosedGrid>
+            {opened && <NavBarOpenedGrid />}
+          </>
+        );
+      })}
     </Grid>
   );
 };
 const NavBar: React.FC<NavBarType> = ({ opened }: NavBarType): ReactElement => {
+  console.log(opened);
   return (
     <Navbar hidden={opened} width={{ sm: opened ? 200 : 65, lg: opened ? 300 : 65 }}>
-      <SideBarIcons sideMenuIcons={sideBarIcons} />
+      <SideBarIcons sideMenuIcons={sideBarIcons} opened={opened} />
     </Navbar>
   );
 };
