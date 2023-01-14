@@ -9,6 +9,7 @@ import {
   IconUser,
   IconSettings,
 } from '@tabler/icons';
+import MenuComponent from '../../MenuComponent';
 interface NavBarType {
   opened: boolean;
 }
@@ -22,20 +23,13 @@ const sideBarIcons = [
   { icon: IconSettings, label: 'Settings' },
 ];
 const NavBarOpenedGrid = () => {
-  return (
-    <Grid.Col xs={10}>
-      ss
-    </Grid.Col>
-  );
+  return <Grid.Col xs={10}>ss</Grid.Col>;
 };
 const NavBarClosedGrid = ({ children, opened }: any) => {
   console.log({ opened });
   return (
     <>
-      <Grid.Col
-        xs={opened ? 2 : 12}
-        sx={{ paddingLeft: 26 }}
-      >
+      <Grid.Col xs={opened ? 2 : 12} sx={{ paddingLeft: 26 }}>
         {children}
       </Grid.Col>
     </>
@@ -75,6 +69,7 @@ const NavBar: React.FC<NavBarType> = ({ opened }: NavBarType): ReactElement => {
   return (
     <Navbar hidden={opened} width={{ sm: opened ? 200 : 65, lg: opened ? 300 : 65 }}>
       <SideBarIcons sideMenuIcons={sideBarIcons} opened={opened} />
+      <MenuComponent />
     </Navbar>
   );
 };
