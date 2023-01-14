@@ -9,7 +9,7 @@ import {
   IconUser,
   IconSettings,
 } from '@tabler/icons';
-import MenuComponent from '../../MenuComponent';
+import { MenuComponent, MenuComponentReusable } from '../../MenuComponent';
 interface NavBarType {
   opened: boolean;
 }
@@ -29,7 +29,7 @@ const NavBarClosedGrid = ({ children, opened }: any) => {
   console.log({ opened });
   return (
     <>
-      <Grid.Col xs={opened ? 2 : 12} sx={{ paddingLeft: 26 }}>
+      <Grid.Col xs={opened ? 4 : 12} sx={{ paddingLeft: 26 }}>
         {children}
       </Grid.Col>
     </>
@@ -68,8 +68,17 @@ const NavBar: React.FC<NavBarType> = ({ opened }: NavBarType): ReactElement => {
   console.log(opened);
   return (
     <Navbar hidden={opened} width={{ sm: opened ? 200 : 65, lg: opened ? 300 : 65 }}>
-      <SideBarIcons sideMenuIcons={sideBarIcons} opened={opened} />
-      <MenuComponent />
+      {/* <SideBarIcons sideMenuIcons={sideBarIcons} opened={opened} /> */}
+      <Grid>
+        <Grid.Col xs={opened ? 3 : 12}>
+          <MenuComponentReusable items={sideBarIcons} />
+        </Grid.Col>
+        {opened && (
+          <Grid.Col xs={9}>
+            <MenuComponent />
+          </Grid.Col>
+        )}
+      </Grid>
     </Navbar>
   );
 };

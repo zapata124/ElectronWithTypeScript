@@ -1,1 +1,1 @@
-export { default } from './MenuComponent';
+export { default as MenuComponent, MenuComponentReusable } from './MenuComponent';
