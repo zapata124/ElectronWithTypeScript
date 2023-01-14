@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { AppShell, Text, useMantineTheme } from '@mantine/core';
+import { AppShell, useMantineTheme } from '@mantine/core';
 import AppHeader from './AppHeader';
 import NavBar from './NavBar';
 import SideBar from './SideBar';
 import AppFooter from './AppFooter';
 import AppContent from './AppContent';
+
 const AppLayout = () => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
@@ -23,7 +24,7 @@ const AppLayout = () => {
       navbarOffsetBreakpoint='sm'
       asideOffsetBreakpoint='sm'
       navbar={<NavBar opened={opened} />}
-      aside={<SideBar opened={opened} />}
+      // aside={<SideBar opened={opened} />}
       footer={<AppFooter />}
       header={<AppHeader open={opened} handleOpen={handleOpen} />}
     >
