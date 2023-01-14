@@ -1,27 +1,18 @@
 import { useState } from 'react';
-import {
-  AppShell,
-  Navbar,
-  Header,
-  Footer,
-  Aside,
-  Text,
-  MediaQuery,
-  Burger,
-  useMantineTheme,
-} from '@mantine/core';
+import { AppShell, Text, useMantineTheme } from '@mantine/core';
 import AppHeader from './AppHeader';
 import NavBar from './NavBar';
 import SideBar from './SideBar';
 import AppFooter from './AppFooter';
-
+import AppContent from './AppContent';
 const AppLayout = () => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
 
   const handleOpen = () => {
-    setOpened(!opened)
-  }
+    setOpened(!opened);
+  };
+
   return (
     <AppShell
       styles={{
@@ -34,9 +25,9 @@ const AppLayout = () => {
       navbar={<NavBar opened={opened} />}
       aside={<SideBar opened={opened} />}
       footer={<AppFooter />}
-      header={<AppHeader open={opened} handleOpen={handleOpen}/>}
+      header={<AppHeader open={opened} handleOpen={handleOpen} />}
     >
-      <Text>Resize app to see responsive navbar in action</Text>
+      <AppContent />
     </AppShell>
   );
 };

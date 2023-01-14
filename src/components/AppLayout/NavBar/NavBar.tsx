@@ -13,6 +13,7 @@ import { MenuComponent, MenuComponentReusable } from '../../MenuComponent';
 interface NavBarType {
   opened: boolean;
 }
+
 const sideBarIcons = [
   { icon: IconHome2, label: 'Home' },
   { icon: IconGauge, label: 'Dashboard' },
@@ -22,9 +23,11 @@ const sideBarIcons = [
   { icon: IconFingerprint, label: 'Security' },
   { icon: IconSettings, label: 'Settings' },
 ];
+
 const NavBarOpenedGrid = () => {
   return <Grid.Col xs={10}>ss</Grid.Col>;
 };
+
 const NavBarClosedGrid = ({ children, opened }: any) => {
   console.log({ opened });
   return (
@@ -35,6 +38,7 @@ const NavBarClosedGrid = ({ children, opened }: any) => {
     </>
   );
 };
+
 const SideBarIcons = ({ sideMenuIcons, opened }: any) => {
   return (
     <Grid sx={{ paddingTop: 20 }}>
