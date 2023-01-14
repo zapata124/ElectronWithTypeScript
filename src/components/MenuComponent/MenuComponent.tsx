@@ -1,4 +1,4 @@
-import { Menu, Button, Text } from '@mantine/core';
+import { Menu, Button, Text, Box, MantineTransition } from '@mantine/core';
 import {
   IconSettings,
   IconSearch,
@@ -8,12 +8,27 @@ import {
   IconArrowsLeftRight,
 } from '@tabler/icons';
 
-export const MenuComponentReusable = ({ items }: any) => {
+export const MenuComponentReusable = ({ items, opened }: any) => {
   return (
-    <Menu shadow='md' width={200}>
+    <Menu shadow='md' width={200} transition="slide-right">
       {items.map((item: any, id: number) => {
-        const ICON = item.icon
-        return <Menu.Item key={`menu-${id}`}><ICON /></Menu.Item>;
+        const ICON = item.icon;
+        return (
+          <>
+            <Menu.Item key={`menu-${id}`} icon={<ICON />} sx={{ paddingLeft: 19 }}>
+              {opened && (
+                <Menu.Item
+                  sx={{
+                    paddingLeft: 30,
+                    height: 0
+                  }}
+                >
+                  {item.label}
+                </Menu.Item>
+              )}
+            </Menu.Item>
+          </>
+        );
       })}
     </Menu>
   );

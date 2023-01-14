@@ -71,13 +71,13 @@ const NavBar: React.FC<NavBarType> = ({ opened }: NavBarType): ReactElement => {
       {/* <SideBarIcons sideMenuIcons={sideBarIcons} opened={opened} /> */}
       <Grid>
         <Grid.Col xs={opened ? 3 : 12}>
-          <MenuComponentReusable items={sideBarIcons} />
+          <MenuComponentReusable items={sideBarIcons} opened={opened}/>
         </Grid.Col>
-        {opened && (
+        {/* {opened && (
           <Grid.Col xs={9}>
             <MenuComponent />
           </Grid.Col>
-        )}
+        )} */}
       </Grid>
     </Navbar>
   );
