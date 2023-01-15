@@ -5,11 +5,11 @@ interface SideBarType {
 }
 const SideBar: React.FC<SideBarType> = ({ opened }: SideBarType): ReactElement => {
   return (
-    <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
-      <Aside p='md' hiddenBreakpoint={'sm'} hidden={opened} width={{ sm: 200, lg: 300 }}>
-        <Text>Application sidebar</Text>
+    // <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
+    // </MediaQuery>
+      <Aside p='md' hiddenBreakpoint={'sm'} hidden={opened} width={{ sm: 200, lg: 65 }}>
+        {/* <Text>Application sidebar</Text> */}
       </Aside>
-    </MediaQuery>
   );
 };
 
