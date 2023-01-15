@@ -3,8 +3,7 @@ import { Autocomplete } from '@mantine/core';
 const AutoComplete = () => {
   return (
     <Autocomplete
-      label="Your favorite framework/library"
-      placeholder="Pick one"
+      placeholder="Search"
       data={['React', 'Angular', 'Svelte', 'Vue']}
     />
   );
