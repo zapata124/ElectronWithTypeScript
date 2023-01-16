@@ -82,7 +82,8 @@ const AppContent = () => {
   // }, [width, height]);
   console.log(document.getElementsByClassName('edd'), 'ddd');
   console.log(client?.clientWidth, client?.clientHeight);
-  const perentage = (width / 1758) * 100;
+  const perentage = (width / 1758);
+  const newWidth = 880*perentage
   return (
     <Container size={2000} px={0}>
       <div ref={ref} className='edd'>
@@ -92,11 +93,12 @@ const AppContent = () => {
           {/* {APIData && <div>{APIData}</div>} */}
 
           <Grid gutter='md'>
-            <BarChart width={width - 880} height={500} />
+            <BarChart width={newWidth || 880} height={500} />
             <h2>Width: {width}</h2>
             <h2>Percentage: {perentage}</h2>
 
             <h2>Height: {height}</h2>
+            <h2>newWidth: {newWidth}</h2>
             {/* <Grid.Col>
             <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
             </Grid.Col>
