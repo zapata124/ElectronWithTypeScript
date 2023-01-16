@@ -1,7 +1,15 @@
-import { useEffect, useState } from 'react';
+// 👇️ ts-nocheck disables type checking for the entire file
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
+// 👇️ ts-ignore ignores any ts errors on the next line
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { useEffect, useState, useLayoutEffect, useRef } from 'react';
 import { Container, Grid, SimpleGrid, Skeleton, useMantineTheme } from '@mantine/core';
 import { isHtmlElement } from 'react-router-dom/dist/dom';
 import BarChart from '../../Charts/BarChart';
+
 const PRIMARY_COL_HEIGHT = 300;
 
 const AppContent = () => {
@@ -46,38 +54,72 @@ const AppContent = () => {
       })
       .catch((er: any) => console.log(er));
   }, []);
+  const realWidth = window.screen.width * window.devicePixelRatio;
+  const realHeight = window.screen.height * window.devicePixelRatio;
+  console.log(`
+    Your screen resolution is: ${realWidth} x ${realHeight}
+    Your screen devicePixelRatio is: ${window.devicePixelRatio}
+    Your screen width is: ${window.screen.width}
+    Your screen height is: ${window.screen.height}
+  `);
+  const ref = useRef(null);
+
+  const client = document.getElementsByClassName('edd')[0];
+  const clientHeight = client?.clientHeight;
+  const clientWidth = client?.clientWidth;
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  useEffect(() => {
+    window.addEventListener('resize', (event) => {
+      console.log({event})
+      setWidth(clientWidth);
+      setHeight(clientHeight);
+    });
+  }, [clientHeight, clientWidth]);
+  // useLayoutEffect(() => {
+  //   setWidth(ref?.current?.clientWidth);
+  //   setHeight(ref?.current?.clientHeight);
+  // }, [width, height]);
+  console.log(document.getElementsByClassName('edd'), 'ddd');
+  console.log(client?.clientWidth, client?.clientHeight);
+  const perentage = (width / 1758) * 100;
   return (
     <Container size={2000} px={0}>
-      <SimpleGrid cols={2} spacing='md' breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-        {/* <Skeleton height={PRIMARY_COL_HEIGHT} radius='md' animate={false}> 
+      <div ref={ref} className='edd'>
+        <SimpleGrid cols={2} spacing='md' breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+          {/* <Skeleton height={PRIMARY_COL_HEIGHT} radius='md' animate={false}> 
         </Skeleton> */}
-        {/* {APIData && <div>{APIData}</div>} */}
-    
-        {/* <BarChart width={500} height={500} /> */}
+          {/* {APIData && <div>{APIData}</div>} */}
 
-        <Grid gutter='md'>
-          <Grid.Col>
+          <Grid gutter='md'>
+            <BarChart width={width - 880} height={500} />
+            <h2>Width: {width}</h2>
+            <h2>Percentage: {perentage}</h2>
+
+            <h2>Height: {height}</h2>
+            {/* <Grid.Col>
             <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
-          </Grid.Col>
-          <Grid.Col span={6}>
+            </Grid.Col>
+            <Grid.Col span={6}>
             <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
-          </Grid.Col>
-          <Grid.Col span={6}>
+            </Grid.Col>
+            <Grid.Col span={6}>
             <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
-          </Grid.Col>
-        </Grid>
-        <Grid gutter='md'>
-          <Grid.Col>
-            <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
-          </Grid.Col>
-          <Grid.Col span={6}>
-            <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
-          </Grid.Col>
-          <Grid.Col span={6}>
-            <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
-          </Grid.Col>
-        </Grid>
-      </SimpleGrid>
+          </Grid.Col> */}
+          </Grid>
+          <Grid gutter='md'>
+            <Grid.Col>
+              <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
+            </Grid.Col>
+          </Grid>
+        </SimpleGrid>
+      </div>
     </Container>
   );
 };
