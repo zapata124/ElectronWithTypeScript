@@ -1,77 +1,63 @@
-import React, { useMemo } from 'react';
-import { Bar } from '@visx/shape';
-import { Group } from '@visx/group';
-import { GradientTealBlue } from '@visx/gradient';
-import letterFrequency, { LetterFrequency } from '@visx/mock-data/lib/mocks/letterFrequency';
-import { scaleBand, scaleLinear } from '@visx/scale';
+import React, { PureComponent } from 'react';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const data = letterFrequency.slice(5);
-const verticalMargin = 120;
+const data = [
+  {
+    name: 'Page A',
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: 'Page B',
+    uv: 3000,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: 'Page C',
+    uv: 2000,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: 'Page D',
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: 'Page E',
+    uv: 1890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: 'Page F',
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
+  },
+  {
+    name: 'Page G',
+    uv: 3490,
+    pv: 4300,
+    amt: 2100,
+  },
+];
 
-// accessors
-const getLetter = (d: LetterFrequency) => d.letter;
-const getLetterFrequency = (d: LetterFrequency) => Number(d.frequency) * 100;
+const BarChartComponent = () =>  {
+  const demoUrl = 'https://codesandbox.io/s/tiny-bar-chart-35meb';
 
-export type BarsProps = {
-  width: number;
-  height: number;
-  events?: boolean;
+
+    return (
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart width={150} height={40} data={data}>
+          <Bar dataKey="uv" fill="#8884d8" />
+        </BarChart>
+      </ResponsiveContainer>
+    );
+  
 };
 
-const BarChart = ({ width, height, events = false }: BarsProps) => {
-  // bounds
-  const xMax = width;
-  const yMax = height - verticalMargin;
-
-  // scales, memoize for performance
-  const xScale = useMemo(
-    () =>
-      scaleBand<string>({
-        range: [0, xMax],
-        round: true,
-        domain: data.map(getLetter),
-        padding: 0.4,
-      }),
-    [xMax],
-  );
-  const yScale = useMemo(
-    () =>
-      scaleLinear<number>({
-        range: [yMax, 0],
-        round: true,
-        domain: [0, Math.max(...data.map(getLetterFrequency))],
-      }),
-    [yMax],
-  );
-
-  return width < 10 ? null : (
-    <svg width={width} height={height}>
-      <GradientTealBlue id="teal" />
-      <rect width={width} height={height} fill="url(#teal)" rx={14} />
-      <Group top={verticalMargin / 2}>
-        {data.map((d) => {
-          const letter = getLetter(d);
-          const barWidth = xScale.bandwidth();
-          const barHeight = yMax - (yScale(getLetterFrequency(d)) ?? 0);
-          const barX = xScale(letter);
-          const barY = yMax - barHeight;
-          return (
-            <Bar
-              key={`bar-${letter}`}
-              x={barX}
-              y={barY}
-              width={barWidth}
-              height={barHeight}
-              fill="rgba(23, 233, 217, .5)"
-              onClick={() => {
-                if (events) alert(`clicked: ${JSON.stringify(Object.values(d))}`);
-              }}
-            />
-          );
-        })}
-      </Group>
-    </svg>
-  );
-};
-
-export default BarChart;
+export default BarChartComponent;

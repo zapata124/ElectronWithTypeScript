@@ -71,7 +71,7 @@ const AppContent = () => {
   const [height, setHeight] = useState(0);
   useEffect(() => {
     window.addEventListener('resize', (event) => {
-      console.log({event})
+      console.log({ event });
       setWidth(clientWidth);
       setHeight(clientHeight);
     });
@@ -82,8 +82,8 @@ const AppContent = () => {
   // }, [width, height]);
   console.log(document.getElementsByClassName('edd'), 'ddd');
   console.log(client?.clientWidth, client?.clientHeight);
-  const perentage = (width / 1758);
-  const newWidth = 880*perentage
+  const perentage = width / 1758;
+  const newWidth = 880 * perentage;
   return (
     <Container size={2000} px={0}>
       <div ref={ref} className='edd'>
@@ -93,7 +93,9 @@ const AppContent = () => {
           {/* {APIData && <div>{APIData}</div>} */}
 
           <Grid gutter='md'>
-            <BarChart width={newWidth || 880} height={500} />
+            <div style={{ width: width, heihgt: height }}>
+              <BarChart />
+            </div>
             <h2>Width: {width}</h2>
             <h2>Percentage: {perentage}</h2>
 
