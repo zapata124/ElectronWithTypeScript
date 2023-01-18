@@ -133,6 +133,13 @@ const data2 = [
     'quantity-units': 'thousand barrels',
   },
 ];
+const MyMap: any = {};
+
+data2.forEach((element: any) => {
+  if (MyMap[element.originName]) MyMap[element.originName].quantity += element.quantity;
+  else MyMap[element.originName] = element;
+});
+console.log({ MyMap });
 const data = [
   {
     name: 'Page A',
@@ -185,7 +192,7 @@ const BarChartComponent = () => {
     <ResponsiveContainer width='100%' height='100%'>
       <BarChart width={150} height={40} data={data2}>
         {/* <Bar dataKey='uv' fill='#8884d8' /> */}
-        <XAxis dataKey="originName" />
+        <XAxis dataKey='originName' />
         <Bar dataKey='quantity' fill='red' />
       </BarChart>
     </ResponsiveContainer>
