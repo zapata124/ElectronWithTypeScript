@@ -67,8 +67,8 @@ const AppContent = () => {
   const client = document.getElementsByClassName('edd')[0];
   const clientHeight = client?.clientHeight;
   const clientWidth = client?.clientWidth;
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState(880);
+  const [height, setHeight] = useState(500);
   useEffect(() => {
     window.addEventListener('resize', (event) => {
       console.log({ event });
