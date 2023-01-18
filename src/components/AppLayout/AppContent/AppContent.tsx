@@ -11,6 +11,7 @@ import { isHtmlElement } from 'react-router-dom/dist/dom';
 import BarChart from '../../Charts/BarChart';
 
 const PRIMARY_COL_HEIGHT = 300;
+const MyMap: any = {};
 
 const AppContent = () => {
   const theme = useMantineTheme();
@@ -29,41 +30,46 @@ const AppContent = () => {
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
       },
-    )
+      )
       .then((res: any) => {
         console.log(res);
         // setAPIData(res);
         return res.json();
       })
       .then((data: any) => {
-        let sum = 0;
+        // let sum = 0;
         // if (data.response.data) {
-        //   console.log('yes');
-        //   data?.response?.data?.forEach((item: any) => {
-        //     console.log(item);
-        //     // item.forEach((item: any) => {
-        //     //   sum += item.quantity;
-        //     // });
-        //   });
-        // }
-        data.response.data.forEach((item: any) => {
-          sum += item.quantity + 5;
-        });
-        console.log(data.response.data);
-        setAPIData(sum);
-      })
-      .catch((er: any) => console.log(er));
-  }, []);
-  const realWidth = window.screen.width * window.devicePixelRatio;
-  const realHeight = window.screen.height * window.devicePixelRatio;
-  console.log(`
-    Your screen resolution is: ${realWidth} x ${realHeight}
-    Your screen devicePixelRatio is: ${window.devicePixelRatio}
-    Your screen width is: ${window.screen.width}
-    Your screen height is: ${window.screen.height}
-  `);
-  const ref = useRef(null);
-
+          //   console.log('yes');
+          //   data?.response?.data?.forEach((item: any) => {
+            //     console.log(item);
+            //     // item.forEach((item: any) => {
+              //     //   sum += item.quantity;
+              //     // });
+              //   });
+              // }
+              // data.response.data.forEach((item: any) => {
+                //   sum += item.quantity + 5;
+                // });
+                console.log(data.response.data);
+                data.response.data.forEach((element: any) => {
+                  if (MyMap[element.originName]) MyMap[element.originName].quantity += element.quantity;
+                  else MyMap[element.originName] = element;
+                });
+                setAPIData(sum);
+              })
+              .catch((er: any) => console.log(er));
+            }, []);
+            const realWidth = window.screen.width * window.devicePixelRatio;
+            const realHeight = window.screen.height * window.devicePixelRatio;
+            console.log(`
+            Your screen resolution is: ${realWidth} x ${realHeight}
+            Your screen devicePixelRatio is: ${window.devicePixelRatio}
+            Your screen width is: ${window.screen.width}
+            Your screen height is: ${window.screen.height}
+            `);
+            const ref = useRef(null);
+            console.log({ MyMap });
+            
   const client = document.getElementsByClassName('edd')[0];
   const clientHeight = client?.clientHeight;
   const clientWidth = client?.clientWidth;
