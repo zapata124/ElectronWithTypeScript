@@ -12,25 +12,26 @@ import BarChart from '../../Charts/BarChart';
 
 const PRIMARY_COL_HEIGHT = 300;
 const MyMap: any = {};
-const mm = new Map()
+const mm = new Map();
 const AppContent = () => {
   const theme = useMantineTheme();
   const SECONDARY_COL_HEIGHT = PRIMARY_COL_HEIGHT / 2 - theme.spacing.md / 2;
   const [APIData, setAPIData] = useState<any>(null);
+  const eiaGOV =
+    'https://api.eia.gov/v2/crude-oil-imports/data/?api_key=GZD3mdbCqdHogvV01caMedoegYivnpkd6X4FxGyQ&frequency=monthly&data[0]=quantity&start=2022-01&end=2022-06&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=5000';
+  const gasPricesAPI =
+    'https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=DEMO_KEY&fuel_type=all,ELEC&state=NY&limit=2';
   useEffect(() => {
-    fetch(
-      'https://api.eia.gov/v2/crude-oil-imports/data/?api_key=GZD3mdbCqdHogvV01caMedoegYivnpkd6X4FxGyQ&frequency=monthly&data[0]=quantity&start=2022-01&end=2022-06&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=5000',
-      {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        // mode: 'no-cors', // no-cors, *cors, same-origin
-        // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        // credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-          'Content-Type': 'application/json',
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
+    fetch(gasPricesAPI, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      // mode: 'no-cors', // no-cors, *cors, same-origin
+      // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      // credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      )
+    })
       .then((res: any) => {
         console.log(res);
         // setAPIData(res);
@@ -39,37 +40,37 @@ const AppContent = () => {
       .then((data: any) => {
         // let sum = 0;
         // if (data.response.data) {
-          //   console.log('yes');
-          //   data?.response?.data?.forEach((item: any) => {
-            //     console.log(item);
-            //     // item.forEach((item: any) => {
-              //     //   sum += item.quantity;
-              //     // });
-              //   });
-              // }
-              // data.response.data.forEach((item: any) => {
-                //   sum += item.quantity + 5;
-                // });
-                console.log(data.response.data);
-                data.response.data.forEach((element: any) => {
-                  if (MyMap[element.originName]) MyMap[element.originName].quantity += element.quantity;
-                  else MyMap[element.originName] = element;
-                });
-                setAPIData(sum);
-              })
-              .catch((er: any) => console.log(er));
-            }, []);
-            const realWidth = window.screen.width * window.devicePixelRatio;
-            const realHeight = window.screen.height * window.devicePixelRatio;
-            console.log(`
+        //   console.log('yes');
+        //   data?.response?.data?.forEach((item: any) => {
+        //     console.log(item);
+        //     // item.forEach((item: any) => {
+        //     //   sum += item.quantity;
+        //     // });
+        //   });
+        // }
+        // data.response.data.forEach((item: any) => {
+        //   sum += item.quantity + 5;
+        // });
+        console.log(data);
+        // data.response.data.forEach((element: any) => {
+        //   if (MyMap[element.originName]) MyMap[element.originName].quantity += element.quantity;
+        //   else MyMap[element.originName] = element;
+        // });
+        // setAPIData(sum);
+      })
+      .catch((er: any) => console.log(er));
+  }, []);
+  const realWidth = window.screen.width * window.devicePixelRatio;
+  const realHeight = window.screen.height * window.devicePixelRatio;
+  console.log(`
             Your screen resolution is: ${realWidth} x ${realHeight}
             Your screen devicePixelRatio is: ${window.devicePixelRatio}
             Your screen width is: ${window.screen.width}
             Your screen height is: ${window.screen.height}
             `);
-            const ref = useRef(null);
-            console.log({ MyMap });
-            
+  const ref = useRef(null);
+  console.log({ MyMap });
+
   const client = document.getElementsByClassName('edd')[0];
   const clientHeight = client?.clientHeight;
   const clientWidth = client?.clientWidth;
