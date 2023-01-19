@@ -22,14 +22,11 @@ const AppContent = () => {
   const gasPricesAPI =
     'https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=DEMO_KEY&fuel_type=all,ELEC&state=NY&limit=2';
   useEffect(() => {
-    fetch(gasPricesAPI, {
-      method: 'GET', // *GET, POST, PUT, DELETE, etc.
-      // mode: 'no-cors', // no-cors, *cors, same-origin
-      // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      // credentials: 'same-origin', // include, *same-origin, omit
+    // no in use !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    fetch('gasPricesAPI', {
+      method: 'GET', 
       headers: {
         'Content-Type': 'application/json',
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
     })
       .then((res: any) => {
@@ -83,10 +80,6 @@ const AppContent = () => {
       setHeight(clientHeight);
     });
   }, [clientHeight, clientWidth]);
-  // useLayoutEffect(() => {
-  //   setWidth(ref?.current?.clientWidth);
-  //   setHeight(ref?.current?.clientHeight);
-  // }, [width, height]);
   console.log(document.getElementsByClassName('edd'), 'ddd');
   console.log(client?.clientWidth, client?.clientHeight);
   const perentage = width / 1758;
@@ -95,28 +88,14 @@ const AppContent = () => {
     <Container size={2000} px={0}>
       <div ref={ref} className='edd'>
         <SimpleGrid cols={2} spacing='md' breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-          {/* <Skeleton height={PRIMARY_COL_HEIGHT} radius='md' animate={false}> 
-        </Skeleton> */}
-          {/* {APIData && <div>{APIData}</div>} */}
-
           <Grid gutter='md'>
             <div style={{ width: width, heihgt: height }}>
               <BarChart />
             </div>
             <h2>Width: {width}</h2>
             <h2>Percentage: {perentage}</h2>
-
             <h2>Height: {height}</h2>
             <h2>newWidth: {newWidth}</h2>
-            {/* <Grid.Col>
-            <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
-            </Grid.Col>
-            <Grid.Col span={6}>
-            <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
-            </Grid.Col>
-            <Grid.Col span={6}>
-            <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
-          </Grid.Col> */}
           </Grid>
           <Grid gutter='md'>
             <Grid.Col>
