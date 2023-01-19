@@ -10,9 +10,7 @@ import {
   IconSettings,
 } from '@tabler/icons';
 import { MenuComponent, MenuComponentReusable } from '../../MenuComponent';
-interface NavBarType {
-  opened: boolean;
-}
+import { useToggle } from '../../../providers/ToggleProvider';
 
 const sideBarIcons = [
   { icon: IconHome2, label: 'Home' },
@@ -68,14 +66,14 @@ const SideBarIcons = ({ sideMenuIcons, opened }: any) => {
     </Grid>
   );
 };
-const NavBar: React.FC<NavBarType> = ({ opened }: NavBarType): ReactElement => {
-  console.log(opened);
+const NavBar: React.FC = (): ReactElement => {
+  const { open, handleToggle } = useToggle()
   return (
-    <Navbar hidden={opened} width={{ sm: opened ? 200 : 65, lg: opened ? 300 : 65 }}>
+    <Navbar hidden={open} width={{ sm: open ? 200 : 65, lg: open ? 300 : 65 }}>
       {/* <SideBarIcons sideMenuIcons={sideBarIcons} opened={opened} /> */}
       <Grid>
-        <Grid.Col xs={opened ? 3 : 12}>
-          <MenuComponentReusable items={sideBarIcons} opened={opened}/>
+        <Grid.Col xs={open ? 3 : 12}>
+          <MenuComponentReusable items={sideBarIcons} opened={open} handleToggle={handleToggle}/>
         </Grid.Col>
         {/* {opened && (
           <Grid.Col xs={9}>

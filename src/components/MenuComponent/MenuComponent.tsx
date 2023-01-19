@@ -8,19 +8,23 @@ import {
   IconArrowsLeftRight,
 } from '@tabler/icons';
 
-export const MenuComponentReusable = ({ items, opened }: any) => {
+export const MenuComponentReusable = ({ items, opened, handleToggle }: any) => {
   return (
-    <Menu shadow='md' width={200} transition="slide-right">
+    <Menu shadow='md' width={200} transition='slide-right'>
       {items.map((item: any, id: number) => {
         const ICON = item.icon;
         return (
           <>
-            <Menu.Item key={`menu-${id}`} icon={<ICON />} sx={{ paddingLeft: 19 }}>
+            <Menu.Item
+              key={`menu-${id}`}
+              icon={<ICON onClick={handleToggle} />}
+              sx={{ paddingLeft: 19 }}
+            >
               {opened && (
                 <Menu.Item
                   sx={{
                     paddingLeft: 30,
-                    height: 0
+                    height: 0,
                   }}
                 >
                   {item.label}

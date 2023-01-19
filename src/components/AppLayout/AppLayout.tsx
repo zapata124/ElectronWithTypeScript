@@ -5,31 +5,28 @@ import NavBar from './NavBar';
 import SideBar from './SideBar';
 import AppFooter from './AppFooter';
 import AppContent from './AppContent';
-
+import { ToggleProvider } from '../../providers/ToggleProvider';
 const AppLayout = () => {
   const theme = useMantineTheme();
-  const [opened, setOpened] = useState(false);
-
-  const handleOpen = () => {
-    setOpened(!opened);
-  };
 
   return (
-    <AppShell
-      styles={{
-        main: {
-          background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-        },
-      }}
-      navbarOffsetBreakpoint='sm'
-      asideOffsetBreakpoint='sm'
-      navbar={<NavBar opened={opened} />}
-      aside={<SideBar opened={opened} />}
-      footer={<AppFooter />}
-      header={<AppHeader open={opened} handleOpen={handleOpen} />}
-    >
-      <AppContent />
-    </AppShell>
+    <ToggleProvider>
+      <AppShell
+        styles={{
+          main: {
+            background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+          },
+        }}
+        navbarOffsetBreakpoint='sm'
+        asideOffsetBreakpoint='sm'
+        navbar={<NavBar />}
+        aside={<SideBar />}
+        footer={<AppFooter />}
+        header={<AppHeader />}
+      >
+        <AppContent />
+      </AppShell>
+    </ToggleProvider>
   );
 };
 
