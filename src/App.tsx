@@ -1,6 +1,9 @@
 import React from 'react';
+import { RouterProvider } from 'react-router-dom';
 import { Drawer, SideBar, Header, Footer } from './components';
 import AppLayout from './components/AppLayout';
+
+import router from './router'
 const App = () => {
   return (
     // <>
@@ -14,7 +17,8 @@ const App = () => {
     //   <SideBar />
     //   <Footer />
     // </>
-    <AppLayout />
+    // <AppLayout />
+    <RouterProvider router={router} />
   );
 };
 
