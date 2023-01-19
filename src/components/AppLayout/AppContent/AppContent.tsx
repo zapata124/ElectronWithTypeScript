@@ -12,7 +12,7 @@ import BarChart from '../../Charts/BarChart';
 
 const PRIMARY_COL_HEIGHT = 300;
 const MyMap: any = {};
-
+const mm = new Map()
 const AppContent = () => {
   const theme = useMantineTheme();
   const SECONDARY_COL_HEIGHT = PRIMARY_COL_HEIGHT / 2 - theme.spacing.md / 2;
