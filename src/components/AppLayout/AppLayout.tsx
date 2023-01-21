@@ -5,7 +5,9 @@ import NavBar from './NavBar';
 import SideBar from './SideBar';
 import AppFooter from './AppFooter';
 import AppContent from './AppContent';
+import { Outlet, Navigate } from 'react-router-dom';
 import { ToggleProvider } from '../../providers/ToggleProvider';
+
 const AppLayout = () => {
   const theme = useMantineTheme();
 
@@ -24,7 +26,7 @@ const AppLayout = () => {
         footer={<AppFooter />}
         header={<AppHeader />}
       >
-        <AppContent />
+        <Outlet />
       </AppShell>
     </ToggleProvider>
   );

@@ -1,16 +1,28 @@
 import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
-import AppLayout from '../components/AppLayout'
+import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
+import AppLayout from '../components/AppLayout';
+import AppContent from '../components/AppLayout/AppContent';
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <AppLayout />,
-    // children: [
-    //   {
-    //     path: 'team',
-    //     element: <Team />,
-    //   },
-    // ],
+    children: [
+      {
+        path: '/',
+        element: <Navigate to={'Content'} />,
+      },
+      {
+        path: 'Content',
+        element: <Outlet />,
+        children: [
+          {
+            path: ':id',
+            element: <AppContent />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 
