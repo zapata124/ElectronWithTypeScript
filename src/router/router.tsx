@@ -13,7 +13,7 @@ const router = createBrowserRouter([
         element: <Navigate to={'Content'} />,
       },
       {
-        path: 'Content',
+        path: 'Content/',
         element: <Outlet />,
         children: [
           {
