@@ -7,7 +7,7 @@ import {
   IconTrash,
   IconArrowsLeftRight,
 } from '@tabler/icons';
-
+import { Link } from 'react-router-dom';
 export const MenuComponentReusable = ({ items, opened, handleToggle }: any) => {
   return (
     <Menu shadow='md' width={200} transition='slide-right'>
@@ -15,22 +15,24 @@ export const MenuComponentReusable = ({ items, opened, handleToggle }: any) => {
         const ICON = item.icon;
         return (
           <>
-            <Menu.Item
-              key={`menu-${id}`}
-              icon={<ICON onClick={handleToggle} />}
-              sx={{ paddingLeft: 19 }}
-            >
-              {opened && (
-                <Menu.Item
-                  sx={{
-                    paddingLeft: 30,
-                    height: 0,
-                  }}
-                >
-                  {item.label}
-                </Menu.Item>
-              )}
-            </Menu.Item>
+            <Link to={`Content/${item.label}`}>
+              <Menu.Item
+                key={`menu-${id}`}
+                icon={<ICON onClick={handleToggle} />}
+                sx={{ paddingLeft: 19 }}
+              >
+                {opened && (
+                  <Menu.Item
+                    sx={{
+                      paddingLeft: 30,
+                      height: 0,
+                    }}
+                  >
+                    {item.label}
+                  </Menu.Item>
+                )}
+              </Menu.Item>
+            </Link>
           </>
         );
       })}
