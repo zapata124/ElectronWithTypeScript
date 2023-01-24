@@ -6,10 +6,10 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { useEffect, useState, useLayoutEffect, useRef } from 'react';
-import { Container, Grid, SimpleGrid, Skeleton, useMantineTheme } from '@mantine/core';
+import { Card, Container, Grid, SimpleGrid, Skeleton, useMantineTheme } from '@mantine/core';
 import { isHtmlElement } from 'react-router-dom/dist/dom';
 import BarChart from '../../Charts/BarChart';
-
+import CardComponent from '../../Card/CardComponent';
 const PRIMARY_COL_HEIGHT = 300;
 const MyMap: any = {};
 const mm = new Map();
@@ -24,7 +24,7 @@ const AppContent = () => {
   useEffect(() => {
     // no in use !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     fetch('gasPricesAPI', {
-      method: 'GET', 
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -105,7 +105,8 @@ const AppContent = () => {
               <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
             </Grid.Col>
             <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} />
+              <CardComponent />
+              {/* <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' animate={false} /> */}
             </Grid.Col>
           </Grid>
         </SimpleGrid>
