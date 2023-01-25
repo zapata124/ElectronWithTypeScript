@@ -19,11 +19,25 @@ const router = createBrowserRouter([
           {
             path: 'home',
             element: <AppContent />,
+            loader: async ({ params }) => {
+              const data = await fetch(
+                'https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=DEMO_KEY&fuel_type=all,ELEC&state=NY&limit=2',
+                {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                },
+              );
+              const dataJson = await data.json();
+              console.log({ dataJson });
+              return dataJson
+            },
           },
           {
             path: ':id',
             element: <AppContent />,
-          }
+          },
         ],
       },
     ],
