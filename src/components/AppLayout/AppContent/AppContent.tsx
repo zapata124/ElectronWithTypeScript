@@ -93,7 +93,7 @@ const AppContent = () => {
         <SimpleGrid cols={2} spacing='md' breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
           <Grid gutter='md'>
             <div style={{ width: width, heihgt: height }}>
-              <BarChart />
+              {/* <BarChart /> */}
             </div>
             <h2>Width: {width}</h2>
             <h2>Percentage: {perentage}</h2>

@@ -143,11 +143,13 @@ const MyMap: any = {};
 // console.log({ MyMap });
 
 const BarChartComponent = () => {
+  // / need to add loading
   const { response }: any = useLoaderData();
   const { data } = response;
   const newData = Object.values(
     data.reduce((reduceData: any, current: any) => {
-      if (reduceData[current.originName]) reduceData[current.originName].quantity += current.quantity;
+      if (reduceData[current.originName])
+        reduceData[current.originName].quantity += current.quantity;
       else reduceData[current.originName] = current;
       return reduceData;
     }, {}),
@@ -157,7 +159,7 @@ const BarChartComponent = () => {
 
   return (
     <ResponsiveContainer width='100%' height='100%'>
-      <BarChart width={150} height={40} data={newData}>
+      <BarChart width={1} height={40} data={newData}>
         {/* <Bar dataKey='uv' fill='#8884d8' /> */}
         <XAxis dataKey='originName' />
         <Bar dataKey='quantity' fill='red' />
