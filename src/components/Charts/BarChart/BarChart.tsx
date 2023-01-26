@@ -136,64 +136,28 @@ const data2 = [
 ];
 const MyMap: any = {};
 
-data2.forEach((element: any) => {
-  if (MyMap[element.originName]) MyMap[element.originName].quantity += element.quantity;
-  else MyMap[element.originName] = element;
-});
-console.log({ MyMap });
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+// data2.forEach((element: any) => {
+//   if (MyMap[element.originName]) MyMap[element.originName].quantity += element.quantity;
+//   else MyMap[element.originName] = element;
+// });
+// console.log({ MyMap });
 
 const BarChartComponent = () => {
-  const  APIData = useLoaderData()
-  console.log({ APIData })
+  const { response }: any = useLoaderData();
+  const { data } = response;
+  const newData = Object.values(
+    data.reduce((reduceData: any, current: any) => {
+      if (reduceData[current.originName]) reduceData[current.originName].quantity += current.quantity;
+      else reduceData[current.originName] = current;
+      return reduceData;
+    }, {}),
+  );
+  console.log({ data }, newData);
   const demoUrl = 'https://codesandbox.io/s/tiny-bar-chart-35meb';
 
   return (
     <ResponsiveContainer width='100%' height='100%'>
-      <BarChart width={150} height={40} data={data2}>
+      <BarChart width={150} height={40} data={newData}>
         {/* <Bar dataKey='uv' fill='#8884d8' /> */}
         <XAxis dataKey='originName' />
         <Bar dataKey='quantity' fill='red' />
