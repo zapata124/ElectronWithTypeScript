@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import {
   BarChart,
   Bar,
@@ -186,6 +187,8 @@ const data = [
 ];
 
 const BarChartComponent = () => {
+  const  APIData = useLoaderData()
+  console.log({ APIData })
   const demoUrl = 'https://codesandbox.io/s/tiny-bar-chart-35meb';
 
   return (

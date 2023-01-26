@@ -21,7 +21,7 @@ const router = createBrowserRouter([
             element: <AppContent />,
             loader: async ({ params }) => {
               const data = await fetch(
-                'https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=DEMO_KEY&fuel_type=all,ELEC&state=NY&limit=2',
+                'https://api.eia.gov/v2/crude-oil-imports/data/?api_key=GZD3mdbCqdHogvV01caMedoegYivnpkd6X4FxGyQ&frequency=monthly&data[0]=quantity&start=2022-01&end=2022-06&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=5000',
                 {
                   method: 'GET',
                   headers: {
