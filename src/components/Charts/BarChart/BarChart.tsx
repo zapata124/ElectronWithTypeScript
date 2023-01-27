@@ -143,9 +143,9 @@ const MyMap: any = {};
 // console.log({ MyMap });
 
 const BarChartComponent = () => {
-  // / need to add loadingfsdfsdf
+  // / need to add loading
   const { response }: any = useLoaderData();
-  const { data } = response;
+  const { data } = response;dddsad
   const newData = Object.values(
     data.reduce((reduceData: any, current: any) => {
       if (reduceData[current.originName])
