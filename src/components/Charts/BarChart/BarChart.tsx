@@ -157,7 +157,7 @@ const BarChartComponent = () => {
   console.log({ data }, newData);
   const demoUrl = 'https://codesandbox.io/s/tiny-bar-chart-35meb';
 
-  return (
+  return (fgdfgdfg
     <ResponsiveContainer width='100%' height='100%'>
       <BarChart width={1} height={40} data={newData}>
         {/* <Bar dataKey='uv' fill='#8884d8' /> */}
