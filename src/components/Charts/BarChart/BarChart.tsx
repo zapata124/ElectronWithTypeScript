@@ -143,7 +143,7 @@ const MyMap: any = {};
 // console.log({ MyMap });
 
 const BarChartComponent = () => {
-  // / need to add loading
+  // / need to add loadingfsdfsdf
   const { response }: any = useLoaderData();
   const { data } = response;
   const newData = Object.values(
@@ -157,7 +157,7 @@ const BarChartComponent = () => {
   console.log({ data }, newData);
   const demoUrl = 'https://codesandbox.io/s/tiny-bar-chart-35meb';
 
-  return (fgdfgdfg
+  return (
     <ResponsiveContainer width='100%' height='100%'>
       <BarChart width={1} height={40} data={newData}>
         {/* <Bar dataKey='uv' fill='#8884d8' /> */}
