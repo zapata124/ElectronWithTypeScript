@@ -145,7 +145,7 @@ const MyMap: any = {};
 const BarChartComponent = () => {
   // / need to add loading
   const { response }: any = useLoaderData();
-  const { data } = response;dddsad
+  const { data } = response;
   const newData = Object.values(
     data.reduce((reduceData: any, current: any) => {
       if (reduceData[current.originName])
@@ -153,9 +153,9 @@ const BarChartComponent = () => {
       else reduceData[current.originName] = current;
       return reduceData;
     }, {}),
-  // );
-  // console.log({ data }, newData);
-  // const demoUrl = 'https://codesandbox.io/s/tiny-bar-chart-35meb';
+  );
+  console.log({ data }, newData);
+  const demoUrl = 'https://codesandbox.io/s/tiny-bar-chart-35meb';
 
   return (
     <ResponsiveContainer width='100%' height='100%'>
